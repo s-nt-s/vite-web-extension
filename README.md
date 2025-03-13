@@ -156,11 +156,12 @@ This repo includes a Github Action Workflow to create a
 To run the workflow do the following:
 
 1. Go to the **"Actions"** tab in your forked repository from this template
-2. In the left sidebar click on **"Build and Zip Chrome Extension"**
+2. In the left sidebar click on **"Build and Zip Extensions"**
 3. Click on **"Run Workflow"** and select the main branch, then **"Run Workflow"**
 4. Refresh the page and click the most recent run
-5. In the summary page **"Artifacts"** section click on the generated **"vite-web-extension-chrome"**
-6. Upload this file to the Chrome Web Store as described [here](https://developer.chrome.com/docs/webstore/publish/)
+5. In the summary page **"Artifacts"** section click on:
+    * **vite-web-extension-chrome** and upload this file to the Chrome Web Store as described [here](https://developer.chrome.com/docs/webstore/publish/)
+    * **vite-web-extension-firefox** and upload this file to as Firefox Extension as described [here](https://extensionworkshop.com/documentation/publish/)
 
 # Tech Docs <a name="tech"></a>
 

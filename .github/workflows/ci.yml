@@ -30,13 +30,13 @@ jobs:
         run: npm run build:firefox
 
       - name: Upload Chrome Extension Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vite-web-extension-chrome
           path: dist_chrome
 
       - name: Upload Firefox Extension Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: vite-web-extension-firefox
           path: dist_firefox
