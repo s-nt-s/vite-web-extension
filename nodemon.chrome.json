@@ -10,7 +10,7 @@
     "manifest.json",
     "manifest.dev.json"
   ],
-  "ext": "tsx,css,html,ts,json",
+  "ext": "css,html,ts,json",
   "ignore": [
     "src/**/*.spec.ts"
   ],

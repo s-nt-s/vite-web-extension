@@ -1,16 +1,6 @@
-<div align="center">
-<img src="public/icon-128.png" alt="logo"/>
-<h1> Minimalist Chrome/Firefox Extension Boilerplate with<br/>React + Vite + TypeScript + TailwindCSS</h1>
+# Minimalist Chrome/Firefox Extension Boilerplate with<br/>Vite + TypeScript
 
-<h5>
-This template repository is a side product of my Chrome Extension <a target="_blank" rel="noopener noreferrer" href="https://chrome.google.com/webstore/detail/supatabs/icbcnjlaegndjabnjbaeihnnmidbfigk">Supatabs</a>.
-<br />
-If you tend to have tons of tabs open, or are a OneTab user, make sure to check it out <a target="_blank" rel="noopener noreferrer" href="https://chrome.google.com/webstore/detail/supatabs/icbcnjlaegndjabnjbaeihnnmidbfigk">here</a>!
-</h5>
-
-<h5>Supatabs is an example and showcase of what you can develop with this template. (anything you want, really 🚀)</h5>
-
-</div>
+Based on [github.com/JohnBra/vite-web-extension](https://github.com/JohnBra/vite-web-extension).
 
 ## Table of Contents
 
@@ -26,20 +16,18 @@ If you tend to have tons of tabs open, or are a OneTab user, make sure to check 
 
 
 ## Intro <a name="intro"></a>
-This boilerplate is meant to be a minimal quick start for creating chrome/firefox extensions using React, Typescript and Tailwind CSS.
+
+This boilerplate is meant to be a minimal quick start for creating chrome/firefox extensions using Vite and Typescript.
 
 It includes all possible pages such as **new tab**, **dev panel**, **pop up**, etc., as well as corresponding manifest settings by default.
 You will likely have to customize/delete some of the pages (see docs below).
 
 You can build dist files for both Chrome and Firefox with manifest v3.
 
-If you are looking for a React focused way to access the local storage, I also implemented a chrome local/sync storage hook. The hook works
-well with this template. [Check it out here](https://gist.github.com/JohnBra/c81451ea7bc9e77f8021beb4f198ab96).
-
 ## Features <a name="features"></a>
-- [React 19](https://reactjs.org/)
+
+- [Vite](https://vite.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS 4](https://tailwindcss.com/)
 - [i18n (optional)](https://developer.chrome.com/docs/extensions/reference/api/i18n)
 - [Cross browser development with polyfill (optional)](https://github.com/mozilla/webextension-polyfill?tab=readme-ov-file#basic-setup-with-module-bundlers)
 - [ESLint](https://eslint.org/)
@@ -51,31 +39,34 @@ well with this template. [Check it out here](https://gist.github.com/JohnBra/c81
 ### Getting Started <a name="gettingStarted"></a>
 
 #### Developing and building
+
 This template comes with build configs for both Chrome and Firefox. Running
 `dev` or `build` commands without specifying the browser target will build
 for Chrome by default.
 
 1. Clone this repository or click "Use this template"
 2. Change `name` and `description` in `manifest.json`
-3. Run `yarn` or `npm i` (check your node version >= 16)
-4. Run `yarn dev[:chrome|:firefox]`, or `npm run dev[:chrome|:firefox]`
+3. Run `npm i` (check your node version >= 16)
+4. Run `npm run dev[:chrome|:firefox]`
 
 Running a `dev` command will build your extension and watch for changes in the 
 source files. Changing the source files will refresh the corresponding 
 `dist_<chrome|firefox>` folder.
 
-To create an optimized production build, run `yarn build[:chrome|:firefox]`, or
-`npm run build[:chrome|:firefox]`.
+To create an optimized production build, run `npm run build[:chrome|:firefox]`.
 
 #### Load your extension
-For Chrome
+
+For Chrome:
+
 1. Open - Chrome browser
 2. Access - [chrome://extensions](chrome://extensions)
 3. Tick - Developer mode
 4. Find - Load unpacked extension
 5. Select - `dist_chrome` folder in this project (after dev or build)
 
-For Firefox
+For Firefox:
+
 1. Open - Firefox browser
 2. Access - [about:debugging#/runtime/this-firefox](about:debugging#/runtime/this-firefox)
 3. Click - Load temporary Add-on
@@ -84,10 +75,12 @@ For Firefox
 ### Customization <a name="customization"></a>
 
 #### Adding / removing pages
+
 The template includes source code for **all** of the extension pages (i.e. New Tab, Dev Tools, Popup, Side Panel
 etc.). You will likely have to customize it to fit your needs.
 
 E.g. you don't want the newtab page to activate whenever you open a new tab:
+
 1. remove the directory `newtab` and its contents in `src/pages`
 2. remove `chrome_url_overrides: { newtab: 'src/pages/newtab/index.html' },` in `manifest.json`
 
@@ -114,7 +107,7 @@ To include the side panel for Chrome add the following to the `manifest.json`:
 ```
 
 If you need to declare pages in addition to the manifest pages, e.g. a custom `app` page, create a 
-new folder in the `pages` directory and add the corresponding `.html`, `.tsx` and `.css` 
+new folder in the `pages` directory and add the corresponding `.html`, `.ts` and `.css` 
 files (see `options/*` for an example to copy). Then include the root html in the `vite.config.base.ts` 
 file under `build.rollupOptions.input` like so:
 
@@ -126,7 +119,7 @@ build: {
          app: resolve(pagesDir, "app", "index.html"),
       },
       output: {
-         entryFileNames: (chunk) => `src/pages/${chunk.name}/index.js`,
+         entryFileNames: (chunk) => `src/pages/${chunk.name}/index.ts`,
       },
    },
 }
@@ -134,12 +127,12 @@ build: {
 ```
 
 #### Styling
-CSS files in the `src/pages/*` directories are not necessary. They are left in there in case you want 
-to use it in combination with Tailwind CSS. **Feel free to delete them**.
 
-Tailwind can be configured, themed and extended according to the [docs](https://tailwindcss.com/docs/theme).
+CSS files in the `src/pages/*` directories are not necessary. They are left in there in case you want 
+to use it. **Feel free to delete them**.
 
 #### Internationalization (i18n)
+
 To enable internationalization set the `localize` flag in the `vite.config.base.ts` to `true`.
 
 The template includes a directory `locales` with a basic setup for english i18n. Enabling i18n
@@ -153,13 +146,15 @@ If you don't need i18n you can ignore the `locales` directory until you need it,
 be copied into the build folder unless the `localize` flag is set to `true`.
 
 ### Publish your extension to the CWS<a name="publish"></a>
+
 To upload an extension to the Chrome store you have to pack (zip) it and then upload it to your item 
 in the Chrome Web Store.
 
 This repo includes a Github Action Workflow to create a 
-[optimized prod build and the zip file](https://github.com/JohnBra/vite-web-extension/actions/workflows/ci.yml).
+[optimized prod build and the zip file](.github/workflows/ci.yml).
 
 To run the workflow do the following:
+
 1. Go to the **"Actions"** tab in your forked repository from this template
 2. In the left sidebar click on **"Build and Zip Chrome Extension"**
 3. Click on **"Run Workflow"** and select the main branch, then **"Run Workflow"**
@@ -168,6 +163,7 @@ To run the workflow do the following:
 6. Upload this file to the Chrome Web Store as described [here](https://developer.chrome.com/docs/webstore/publish/)
 
 # Tech Docs <a name="tech"></a>
+
 - [Vite](https://vitejs.dev/)
 - [Vite Plugins](https://vitejs.dev/guide/api-plugin.html)
 - [Chrome Extension with manifest 3](https://developer.chrome.com/docs/extensions/mv3/)
@@ -175,7 +171,7 @@ To run the workflow do the following:
 - [Cross browser development with webextension-polyfill](https://github.com/mozilla/webextension-polyfill?tab=readme-ov-file#webextension-browser-api-polyfill)
 - [@crxjs/vite-plugin](https://crxjs.dev/vite-plugin)
 - [Rollup](https://rollupjs.org/guide/en/)
-- [Tailwind CSS 4](https://tailwindcss.com/docs/configuration)
 
 # Contributing <a name="contributing"></a>
+
 Feel free to open PRs or raise issues!
