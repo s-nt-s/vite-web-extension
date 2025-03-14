@@ -1,3 +1,6 @@
-.your-class {
-    color: aliceblue;
+#extension_content_script {
+    border: 5px solid black;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

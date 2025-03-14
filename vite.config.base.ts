@@ -4,18 +4,32 @@ import { defineConfig, BuildOptions } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { stripDevIcons, crxI18n } from './custom-vite-plugins';
 import manifest from './manifest.json';
-import devManifest from './manifest.dev.json';
 import pkg from './package.json';
 
-
-const isDev = process.env.__DEV__ === 'true';
 // set this flag to true, if you want localization support
 const localize = false;
+
+const isDev = process.env.__DEV__ === 'true';
+
+function setDevIcon<T extends {[key: string]: string}>(obj: T) {
+  const new_obj = Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [
+      key,
+      value.replace(".png", "-dev.png"),
+    ])
+  ) as T;
+  return new_obj;
+}
+
+if (isDev) {
+  manifest.action.default_icon = setDevIcon(manifest.action.default_icon);
+  manifest.icons = setDevIcon(manifest.icons);
+}
 
 export const baseManifest = {
     ...manifest,
     version: pkg.version,
-    ...(isDev ? devManifest : {} as ManifestV3Export),
+    homepage_url: pkg.repository.url,
     ...(localize ? {
       name: '__MSG_extName__',
       description: '__MSG_extDescription__',

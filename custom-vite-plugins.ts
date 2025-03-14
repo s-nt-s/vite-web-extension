@@ -2,6 +2,17 @@ import fs from 'fs';
 import { resolve } from 'path';
 import type { PluginOption } from 'vite';
 
+function getDevIcons(outDir: string): string[] {
+  return fs.readdirSync(outDir)
+      .flatMap(file => {
+        if (!file.endsWith(".png")) return [];
+        if (file.includes("-dev-")) return file;
+        if (file.startsWith("dev-")) return file;
+        if (file.endsWith("-dev.png")) return file;
+        return [];
+      });
+}
+
 // plugin to remove dev icons from prod build
 export function stripDevIcons (isDev: boolean) {
   if (isDev) return null
@@ -12,9 +23,9 @@ export function stripDevIcons (isDev: boolean) {
       return source === 'virtual-module' ? source : null
     },
     renderStart (outputOptions: any, inputOptions: any) {
-      const outDir = outputOptions.dir
-      fs.rm(resolve(outDir, 'dev-icon-32.png'), () => console.log(`Deleted dev-icon-32.png from prod build`))
-      fs.rm(resolve(outDir, 'dev-icon-128.png'), () => console.log(`Deleted dev-icon-128.png from prod build`))
+      getDevIcons(outputOptions.dir).forEach(f=>{
+        fs.rm(resolve(outputOptions.dir, f), () => console.log(`Deleted ${f} from prod build`));
+      });
     }
   }
 }
