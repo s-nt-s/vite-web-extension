@@ -49,21 +49,22 @@ export class Storage {
         });
     }
 
-    static async getBool(key: string) {
-        const v = await Storage.get<unknown>(key);
-        if (typeof v == "boolean") return v;
-        return false;
+    private static async __get<T>(key: string, default_value: T) {
+        const v = await Storage.get(key);
+        if (v == null) return default_value;
+        if ((typeof v) != (typeof default_value)) return default_value
+        return v as T
+    }
+
+    static getBool(key: string) {
+        return Storage.__get(key, false);
     }
 
     static async getNum(key: string) {
-        const v = await Storage.get<unknown>(key);
-        if (typeof v == "number") return v;
-        return NaN;
+        return Storage.__get(key, NaN);
     }
 
     static async getStr(key: string) {
-        const v = await Storage.get<unknown>(key);
-        if (typeof v == "string") return v;
-        return '';
+        return Storage.__get(key, '');
     }
 }
