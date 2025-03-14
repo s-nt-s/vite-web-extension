@@ -6,5 +6,11 @@
   "extDescription": {
     "message": "description in src/locales/en/messages.json",
     "description": "Extension description"
+  },
+  "enable": {
+    "message": "Enable"
+  },
+  "disable": {
+    "message": "Disable"
   }
 }

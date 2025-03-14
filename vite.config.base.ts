@@ -7,7 +7,7 @@ import manifest from './manifest.json';
 import pkg from './package.json';
 
 // set this flag to true, if you want localization support
-const localize = false;
+const localize = true;
 
 const isDev = process.env.__DEV__ === 'true';
 
@@ -49,4 +49,7 @@ export default defineConfig({
     crxI18n({ localize, src: './src/locales' }),
   ],
   publicDir: resolve(__dirname, 'public'),
+  build: {
+    minify: !isDev
+  }
 });

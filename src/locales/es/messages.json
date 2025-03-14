@@ -1,0 +1,16 @@
+{
+  "extName": {
+    "message": "nombre en src/locales/es/messages.json",
+    "description": "Nombre de la Extension"
+  },
+  "extDescription": {
+    "message": "descripción en src/locales/es/messages.json",
+    "description": "Descripción de la Extension"
+  },
+  "enable": {
+    "message": "Activar"
+  },
+  "disable": {
+    "message": "Deshabilitar"
+  }
+}
